@@ -1,0 +1,36 @@
+<section>
+  <div class="page-header">
+    <h1>{{vm.transaction._id ? 'Edit Transaction' : 'New Transaction'}}</h1>
+  </div>
+  <div class="col-md-12">
+    <form name="vm.form.transactionForm" class="form-horizontal" ng-submit="vm.save(vm.form.transactionForm.$valid)" novalidate>
+      <fieldset>
+        <div class="form-group" show-errors>
+          <!--Customer-->
+          <label class="control-label" for="customer">Customer</label>
+          <select name="customer" type="text" ng-options="item.firstName + ' ' + item.lastName as item.firstName + ' ' + item.lastName for item in vm.customers" ng-model="vm.transaction.customer" id="customer" class="form-control" placeholder="Customer" required>
+          </select>
+          <!--Product-->
+          <label class="control-label" for="product">Product</label>
+          <select name="product" type="text" ng-options="item as item.name for item in vm.products" ng-model="vm.transaction.product" id="product" class="form-control" placeholder="Product" required>
+          </select>
+          <!--Quantity-->
+          <label class="control-label" for="quantity">Quantity</label>
+          <input name="quantity" type="number" ng-model="vm.transaction.quantity" id="quantity" class="form-control" placeholder="Enter Quantity" required>
+          <div ng-messages="vm.form.transactionForm.quantity.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Product quantity is required.</p>
+          </div>
+          <!--Total Price-->
+          <label class="control-label" for="totalPrice">Total Price</label>
+          <span ng-bind="vm.transaction.totalPrice">{{vm.transaction.product.price * vm.transaction.quantity | currency}}</span>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">{{vm.transaction._id ? 'Update' : 'Create'}}</button>
+        </div>
+        <div ng-show="vm.error" class="text-danger">
+          <strong ng-bind="vm.error"></strong>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</section>

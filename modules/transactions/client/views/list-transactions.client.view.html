@@ -1,0 +1,28 @@
+<section>
+  <div class="page-header">
+    <h1>Transactions</h1>
+  </div>
+  <div class="list-group">
+    <button class="btn btn-primary" ng-click="order = 'customer'">Order by Name</button>
+    <button class = "btn btn-primary" ng-click="order = 'totalPrice'">Order by Amount Spent</button>
+    <button class="btn btn-primary" ng-click="order = 'created'">Order by Transaction Date</button>
+    <br>
+    <br>
+    <a data-ng-repeat="transaction in vm.transactions | orderBy: order | filter: search"
+       data-ui-sref="transactions.view({ transactionId: transaction._id })"
+       class="list-group-item">
+      <h4 class="list-group-item-heading" data-ng-bind="transaction.orderTime | date:'mediumDate'"></h4>
+      <span>{{transaction.customer}} | {{transaction.totalPrice | currency}}</span> <br> 
+      <small class="list-group-item-text">
+        Posted on
+        <span data-ng-bind="transaction.created | date:'mediumDate'"></span>
+        by
+        <span data-ng-if="transaction.user" data-ng-bind="transaction.user.displayName"></span>
+        <span data-ng-if="!transaction.user">Deleted User</span>
+      </small>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" data-ng-if="vm.transactions.$resolved && !vm.transactions.length">
+    No Transactions yet, why don't you <a data-ui-sref="transactions.create">create one</a>?
+  </div>
+</section>

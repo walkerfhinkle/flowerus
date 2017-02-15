@@ -1,0 +1,33 @@
+<section>
+  <div class="page-header">
+    <h1 data-ng-bind="vm.product.name"></h1>
+  </div>
+  <div class="pull-right"
+       data-ng-show="vm.product.isCurrentUserOwner">
+    <a class="btn btn-primary"
+       data-ui-sref="products.edit({ productId: vm.product._id })">
+      <i class="glyphicon glyphicon-edit"></i>
+    </a>
+    <a class="btn btn-primary" data-ng-click="vm.remove()">
+      <i class="glyphicon glyphicon-trash"></i>
+    </a>
+  </div>
+  <small>
+    <em class="text-muted">
+      Posted on
+      <span data-ng-bind="vm.product.created | date:'mediumDate'"></span>
+      by
+      <span data-ng-if="vm.product.user"
+            data-ng-bind="vm.product.user.displayName"></span>
+      <span data-ng-if="!vm.product.user">Deleted User</span>
+    </em>
+  </small>
+  <p class="lead" data-ng-bind="vm.product.content"></p>
+  <p>UPC: {{vm.product.upc}}</p>
+  <p>Description: {{vm.product.description}}</p>
+  <p>Department: {{vm.product.department}}</p>
+  <p>Price: {{vm.product.price | currency}}</p>
+  <p>Cost: {{vm.product.cost | currency}}</p>
+  <p>Margin: {{vm.product.cost / vm.product.price * 100}}%</p>
+  <p>Inventory: {{vm.product.inventory}}</p>
+</section>

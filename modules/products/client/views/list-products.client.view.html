@@ -1,0 +1,33 @@
+<section>
+  <div class="page-header">
+    <h1>Products</h1>
+  </div>
+  <div class="list-group">
+   <button class="btn btn-primary" ng-click="order = 'name'">Order by Name</button>
+    <button class = "btn btn-primary" ng-click="order = 'price'">Order by Price</button>
+    <button class="btn btn-primary" ng-click="order = 'created'">Order by Input Date</button>
+    <button class="btn btn-primary" ng-click="order = 'department'">Order by Department</button>
+    <br>
+    <br>
+    <a data-ng-repeat="product in vm.products | orderBy: order | filter: search"
+       data-ui-sref="products.view({ productId: product._id })"
+       class="list-group-item">
+      
+      <h4 class="list-group-item-heading" data-ng-bind="product.name"></h4>
+      <p>UPC: {{product.upc}}</p>
+      <p>Price: {{product.price | currency}}</p>
+      <p>Inventory: {{product.inventory}}</p>
+      <p>Department: {{product.department}}</p>
+      <small class="list-group-item-text">
+        Posted on
+        <span data-ng-bind="product.created | date:'mediumDate'"></span>
+        by
+        <span data-ng-if="product.user" data-ng-bind="product.user.displayName"></span>
+        <span data-ng-if="!product.user">Deleted User</span>
+      </small>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" data-ng-if="vm.products.$resolved && !vm.products.length">
+    No Products yet, why don't you <a data-ui-sref="products.create">create one</a>?
+  </div>
+</section>

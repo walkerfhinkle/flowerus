@@ -1,19 +1,10 @@
 <!-- The chat view -->
 <section class="container" ng-controller="ChatController">
   <div class="page-header">
-    <h1>Chat Example</h1>
+    <h1>What can we do for you today?</h1>
+    <h4>Get in touch with one of our employees..</h3>
   </div>
-  <!-- The message form -->
-  <form class="col-xs-12 col-md-offset-4 col-md-4" ng-submit="sendMessage();">
-    <fieldset class="row">
-      <div class="input-group">
-        <input type="text" id="messageText" name="messageText" class="form-control" ng-model="messageText" placeholder="Enter new message">
-        <span class="input-group-btn">
-          <button type="submit" class="btn btn-primary" ng-disabled="!messageText.length">Submit</button>
-        </span>
-      </div>
-    </fieldset>
-  </form>
+ 
   <ul class="list-unstyled">
     <!-- List all messages -->
     <li class="col-xs-12 col-md-offset-4 col-md-4 chat-message" ng-repeat="message in messages">
@@ -26,4 +17,15 @@
       </div>
     </li>
   </ul>
+   <!-- The message form -->
+  <form class="col-xs-12 col-md-offset-4 col-md-4" ng-submit="sendMessage();">
+    <fieldset class="row">
+      <div class="input-group">
+        <input type="text" id="messageText" name="messageText" class="form-control" ng-model="messageText" placeholder="Enter new message">
+        <span class="input-group-btn">
+          <button type="submit" class="btn btn-primary" ng-disabled="!messageText.length">Submit</button>
+        </span>
+      </div>
+    </fieldset>
+  </form>
 </section>

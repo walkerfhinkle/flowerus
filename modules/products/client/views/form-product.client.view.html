@@ -1,0 +1,62 @@
+<section>
+  <div class="page-header">
+    <h1>{{vm.product._id ? 'Edit Product' : 'New Product'}}</h1>
+  </div>
+  <div class="col-md-12">
+    <form name="vm.form.productForm" class="form-horizontal" ng-submit="vm.save(vm.form.productForm.$valid)" novalidate>
+      <fieldset>
+        <div class="form-group" show-errors>
+          <!--Name-->
+          <label class="control-label" for="name">Name</label>
+          <input name="name" type="text" ng-model="vm.product.name" id="name" class="form-control" placeholder="Name" required>
+          <div ng-messages="vm.form.productForm.name.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Product name is required.</p>
+          </div>  
+          <!--UPC-->
+          <label class="control-label" for="upc">UPC</label>
+          <input name="upc" type="number" ng-model="vm.product.upc" id="upc" class="form-control" placeholder="UPC" required>
+          <div ng-messages="vm.form.productForm.upc.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Product UPC is required.</p>
+          </div>
+          <!--Description-->
+          <label class="control-label" for="description">Description</label>
+          <input name="description" type="text" ng-model="vm.product.description" id="description" class="form-control" placeholder="Description" required>
+          <div ng-messages="vm.form.productForm.description.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Product description is required.</p>
+          </div>   
+          <!--Department-->
+               <label class="control-label" for="department">Department</label>
+          <select name="department" type="text" ng-options="item.name as item.name for item in vm.department" ng-model="vm.product.department" id="product" class="form-control" placeholder="Department" required>
+          </select>
+          <div ng-messages="vm.form.productForm.department.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Product department is required.</p>
+          </div>    
+          <!--Price-->
+          <label class="control-label" for="price">Price</label>
+          <input name="price" type="number" min="0.01" step="0.01" max="2500" ng-model="vm.product.price" id="price" class="form-control" placeholder="Price" required>
+          <div ng-messages="vm.form.productForm.price.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Product price is required.</p>
+          </div>
+          <!--Cost-->
+          <label class="control-label" for="cost">Cost</label>
+          <input name="cost" type="number" min="0.01" step="0.01" max="2500" ng-model="vm.product.cost" id="cost" class="form-control" placeholder="Cost" required>
+          <div ng-messages="vm.form.productForm.price.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Product cost is required.</p>
+          </div>    
+            <!--Inventory-->
+          <label class="control-label" for="inventory">Inventory</label>
+          <input name="inventory" type="number" ng-model="vm.product.inventory" id="inventory" class="form-control" placeholder="Inventory Remaining" required>
+          <div ng-messages="vm.form.productForm.inventory.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Product inventory is required.</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">{{vm.product._id ? 'Update' : 'Create'}}</button>
+        </div>
+        <div ng-show="vm.error" class="text-danger">
+          <strong ng-bind="vm.error"></strong>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</section>

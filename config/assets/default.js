@@ -4,7 +4,7 @@ module.exports = {
   client: {
     lib: {
       css: [
-        'public/lib/theme/css/main.css',
+        'public/lib/theme/css/main.css'
         // 'public/lib/bootstrap/dist/css/bootstrap.css',
         // 'public/lib/bootstrap/dist/css/bootstrap-theme.css'
         
@@ -24,7 +24,7 @@ module.exports = {
     },
     css: [
       // 'public/lib/theme/css/*.css',
-      'modules/*/client/css/*.css'
+      'modules/*/client/css/*.css',
       
     ],
     less: [
