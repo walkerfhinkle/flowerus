@@ -1,3 +1,9 @@
+body {
+  background: #333 url('../img/background/background2.jpg') no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  color: #fff;
+}
 
 .content {
   margin-top: 50px;

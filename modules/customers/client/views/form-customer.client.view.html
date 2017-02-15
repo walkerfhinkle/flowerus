@@ -32,16 +32,16 @@
           </div>
         <!--Address-->
           <label class="control-label" for="address">Address</label>
-          <input name="address" type="text" ng-model="vm.customer.address" id="address" class="form-control" placeholder="123 Main St. Anytown, IN 55555" required>
+          <input name="address" type="text" ng-model="vm.customer.address" id="address" class="form-control" placeholder="123 Giggity Dr. Quagmire, IN 12345" required>
           <div ng-messages="vm.form.customerForm.address.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Customer address is required.</p>   
           </div>
         <!--D.O.B-->
-          <label class="control-label" for="dob">Date of Birth</label>
+          <!-- <label class="control-label" for="dob">Date of Birth</label>
           <input name="dob" type="date" ng-model="vm.customer.dob" id="dob" class="form-control" placeholder="1/1/1990" required>
           <div ng-messages="vm.form.customerForm.address.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Customer address is required.</p>   
-          </div>          
+          </div> -->          
         </div>
         <div class="form-group">
           <button type="submit" class="btn btn-primary">{{vm.customer._id ? 'Update' : 'Create'}}</button>

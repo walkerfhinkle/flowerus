@@ -24,7 +24,7 @@ module.exports = {
     },
     css: [
       // 'public/lib/theme/css/*.css',
-      'modules/*/client/css/*.css',
+      'modules/*/client/css/*.css'
       
     ],
     less: [

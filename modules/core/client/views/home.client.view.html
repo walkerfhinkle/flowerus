@@ -1,86 +1,145 @@
-<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet">
 
 <section>
-  <div class="jumbotron text-center">
+  <div class="text-center">
     <div class="row">
-      <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12">
-        <h1 style="font-family: Lobster, cursive;">FlowerUs</h1>
+      <div class="col-md-6 col-sm-2 col-sm-offset-3 col-xs-12">
+        <h1 style="font-family: Amatic SC, cursive; font-size: 130px; color: #fff;">FlowerUs</h1>
+        <div class="row">
+          <p class="lead" style="text-decoration: none; font-size: 16px;">
+          Your <b style="color: #93C54B;"> one-stop shop </b>for flowers extraordinaire!</p>
+        </div>
       </div>
-    </div>
-    <br>
-    <div class="row">
-      <p class="lead">
-        Your <b style="font-family: Lobster, cursive;"> one-stop-shop </b>for flowers extraordinaire!
-      </p>
-    </div>
-    <div class="row">
-      <p>
-        <a href="http://meanjs.org" target="_blank">Learn more</a>
-      </p>
-    </div>
+    </div>  
   </div>
-  <div>
-    <h2>Congrats! You've configured and run the sample application.</h2>
-    <p>MEAN.JS is a web application boilerplate, which means you should start changing everything :-)</p>
-    <p>This sample application tracks users and articles.</p>
-    <ul>
-      <li>
-        Click
-        <em>Sign Up</em> to get started.
+</section>
+
+<section data-ng-controller="HomeController" style="opacity: 0.85;">
+
+  <div class="col-sm-12" id="below-navbar">
+    <ul class="nav nav-tabs">
+      <li role="presentation" ng-class="{ 'active' : hottestsorted}"><a href="#" ng-click="toggleClass(1);"><i>
+       </i> Votes </a>
       </li>
-      <li>
-        Configure your app to work with your social accounts, by editing the
-        <em>/config/env/*.js</em> files.
-      </li>
-      <li>
-        Edit your users module.
-      </li>
-      <li>
-        Add new CRUD modules.
-      </li>
-      <li>
-        Have fun...
+
+      <li role="presentation " ng-class="{ 'active' : newestsorted}"><a href="#" ng-click="toggleClass(2);"><i>
+        </i> Newest </a>
       </li>
     </ul>
   </div>
-  <div class="row">
-    <div class="col-md-3">
-      <h2><strong>M</strong>ongoDB</h2>
-      <p><a target="_blank" href="http://mongodb.org/">MongoDB</a> is a NoSQL database. MongoDB's <a target="_blank" href="http://docs.mongodb.org/manual/">great manual</a> is the place to get started with NoSQL and MongoDB.</p>
+
+  <section data-ng-controller="ProductsController" data-ng-init="find()">
+    <div class="col-lg-12 main-deals">
+
+      <!--products Array Start-->
+      <div class="list-group-home-deals">
+
+        <div dir-paginate="product in products|orderBy:orderByField:!reverseSort|filter:{retailer:filterBy}|itemsPerPage:8"
+          class="list-group-item">
+          <div class="row">
+            <div class="col-lg-2 left-box">
+
+               <div class="row product-link link-button-home">
+                <div class="btn-group-vertical hot-cold-buttons" role="group" aria-label="Vertical button group">
+
+                  <!--Logged Out Buttons-->
+                  <md-button aria-label="button" type="button" class=" vote-count-button">{{product.votes}}</md-button>
+
+                  <md-button aria-label="button" ng-hide="authentication.user" ui-sref="authentication.signup" type="button"
+                          class=" vote-up-button"><i class="glyphicon glyphicon-arrow-up"></i></md-button>
+
+                  <md-button aria-label="button" ng-hide="authentication.user" ui-sref="authentication.signup" type="button"
+                          class="vote-down-button"><i class="glyphicon glyphicon-arrow-down  "></i></md-button>
+
+                  <!--Logged In Buttons-->
+                  <md-button aria-label="button" ng-disabled="disableButtonUp(product)" ng-show="authentication.user" ng-click="upVoteHome(product); removeVotesDailyCall()" type="button"
+                          class=" vote-up-button"><i class="glyphicon glyphicon-arrow-up"></i></md-button>
+
+                  <md-button aria-label="button" ng-disabled="disableButtonDown(product)" ng-show="authentication.user" ng-click="downVoteHome(product)" type="button"
+                          class="vote-down-button"><i class="glyphicon glyphicon-arrow-down  "></i></md-button>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="col-lg-8 middle-box">
+
+<div class="middle-title-top-two">
+              <div class="col-lg-12 middle-title">
+                <div class="col-lg-7">
+
+                  <h4><b><a ng-href="/products/{{vm.product._id}}" ng-bind="vm.product.name"></a></b>
+                  </h4>
+
+                </div>
+                <div class="col-lg-5">
+
+                  <h4><b>Price:</b> $ {{vm.product.price}}
+                  </h4>
+
+                </div>
+
+              </div>
+
+              <div class="col-lg-12">
+                <div class="col-lg-7 middle-title-brand">
+
+                  <h4><a target="_blank" ng-href="{{product.retailer}}">{{vm.product.upc}}</a></h4>
+
+                </div>
+                <div class="col-lg-5 middle-title-country">
+
+                  <h4><b>Description:</b> {{vm.product.description}}
+                  </h4>
+
+                </div>
+
+              </div>
+
+</div>
+<div class="middle-title-bottom-one">
+              <div class="col-lg-12 middle-title home-view-details">
+                <div class="col-lg-7">
+
+                  <h4><a ng-href="/products/{{vm.product._id}}" ng-bind="'View Details...'"></a></h4>
+
+                </div>
+                <div class="col-lg-5 middle-posted-by text-center">
+
+                </div>
+              </div>
+</div>
+            </div>
+
+            <div class="col-lg-2 right-box">
+
+              <div class="row deal-image thumbnail-preview center-block">
+
+                <a ng-href="/products/{{vm.product._id}}">
+
+                  <img class="home-product-image " src="{{product.urlimage}}"/>
+
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- END OF DEAL LIST -->
+      </div>
+
+      <!--products Array End-->
+      <div class="alert alert-warning text-center" data-ng-hide="!products.$resolved || products.length">
+        No products yet, why don't you <a href="/#!/products/create"><b>create one</b></a>?
+      </div>
+
+      <div class="text-center">
+        <dir-pagination-controls></dir-pagination-controls>
+      </div>
+
+      <!--products Array End-->
+
     </div>
-    <div class="col-md-3">
-      <h2><strong>E</strong>xpress</h2>
-      <p><a target="_blank" href="http://expressjs.com/"> Express</a> is a NodeJS server-side application web framework. Check out <a target="_blank" href="http://expressjs.com/4x/api.html">The ExpressJS API reference for more information</a> or <a target="_blank" href="http://stackoverflow.com/questions/8144214/learning-express-for-node-js">StackOverflow</a> for more info.</p>
-    </div>
-    <div class="col-md-3">
-      <h2><strong>A</strong>ngularJS</h2>
-      <p><a target="_blank" href="http://angularjs.org/">AngularJS</a> is client-side web application framework. The <a target="_blank" href="http://www.thinkster.io/">Thinkster Popular Guide</a> and <a target="_blank" href="https://egghead.io/">Egghead Videos</a> are great resources.</p>
-    </div>
-    <div class="col-md-3">
-      <h2><strong>N</strong>ode.js</h2>
-      <p><a target="_blank" href="http://nodejs.org/">Node.js</a> is a JavaScript run-time, popular for being a web server platform. Node's website and this <a target="_blank" href="http://stackoverflow.com/questions/2353818/how-do-i-get-started-with-node-js">stackOverflow thread</a> offer excellent starting points to get to grasps with node.</p>
-    </div>
-  </div>
-  <div class="well">
-    <h2>MEAN.JS Documentation</h2>
-    <p>
-      Once you're familiar with the foundation technology, check out the MEAN.JS Documentation:
-      <ul>
-        <li><a target="_blank" href="http://meanjs.org/docs.html">MEAN.JS Documentation</a>
-        </li>
-        <!-- <li><a target="_blank" href="http://meanjs.org/generator.html">Yeoman Generator</a>
-        </li> -->
-        <li><a target="_blank" href="http://meanjs.org/modules.html">Modules</a>
-        </li>
-        <li><a target="_blank" href="http://meanjs.org/changelog.html">Changelog</a>
-        </li>
-        <li><a target="_blank" href="http://meanjs.org/community.html">Community</a>
-        </li>
-        <li><a target="_blank" href="http://blog.meanjs.org">Blog</a>
-        </li>
-      </ul>
-    </p>
-  </div>
-  <br>Enjoy &amp; Keep Us Updated,
-  <br>The MEAN.JS Team.
+</section>
 </section>
